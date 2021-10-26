@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {#
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            a: <label class="form-control-label" for="a"></label><input class="form-control" type="text" value="0" name="a" id="a"><br>
+            b: <label class="form-control-label" for="b"></label><input class="form-control" type="text" value="0" name="b" id="b"><br>
+            result: <label class="form-control-label" for="result"></label><input class="form-control" type="text" name="result" id="result" disabled><br>
+            <button class="btn btn-primary" type="submit" value="submit" onclick="send_data()">Submit</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename="js/jquery.min.js") }}"></script>
+
+    <script>
+        function send_data(){
+            var baseUrl="http://192.168.1.123:5555/"
+            $.ajax({
+                url: baseUrl+"sum/add",
+                type:"POST",
+                data:JSON.stringify({
+                    "a":parseFloat(document.getElementById("a").value),
+                    "b":parseFloat(document.getElementById("b").value)
+                }),
+                contentType:"application/json",
+                dataType: "json",
+                statusCode:{
+                    400:function (response) {
+                        alert("400:"+ response['responseText'])
+                    },
+                    404:function (response){
+                        alert("404: "+ response['responseText'])
+                    }
+                }
+            }).done(function(response){
+                document.getElementById('a').value = response['a'];
+                document.getElementById('b').value = response['b'];
+                document.getElementById('result').value =response['result'];
+            });
+        }
+    </script>
+</body>
+</html>
