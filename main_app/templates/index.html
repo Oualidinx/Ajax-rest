@@ -6,6 +6,7 @@
     {#
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 </head>
 <body>
@@ -16,36 +17,38 @@
             result: <label class="form-control-label" for="result"></label><input class="form-control" type="text" name="result" id="result" disabled><br>
             <button class="btn btn-primary" type="submit" value="submit" onclick="send_data()">Submit</button>
         </div>
+        <div class="row">
+            <div class="col-md">
+                Countries: <label class="form-control-label" for="country"></label>
+                <select class="select2-country form-control" name="country" id="country">
+                </select>
+            </div>
+            <div class="col-md">
+                date: <label class="form-control-label" for="date"></label>
+                <input class="form-control" type="text" name="date" id="date">
+            </div>
+            <div class="col-md">
+                <label>call the api</label><br>
+                <button class="btn btn-primary" onclick="covid_19()">call covid-19 API</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class=>
+                <table id="table" class="table table-responsive table-hover">
+                    <thead id="table-header">
+                        <tr id="table-header-row"></tr>
+                    </thead>
+                    <tbody id="table-body">
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename="js/jquery.min.js") }}"></script>
-
-    <script>
-        function send_data(){
-            var baseUrl="http://192.168.1.123:5555/"
-            $.ajax({
-                url: baseUrl+"sum/add",
-                type:"POST",
-                data:JSON.stringify({
-                    "a":parseFloat(document.getElementById("a").value),
-                    "b":parseFloat(document.getElementById("b").value)
-                }),
-                contentType:"application/json",
-                dataType: "json",
-                statusCode:{
-                    400:function (response) {
-                        alert("400:"+ response['responseText'])
-                    },
-                    404:function (response){
-                        alert("404: "+ response['responseText'])
-                    }
-                }
-            }).done(function(response){
-                document.getElementById('a').value = response['a'];
-                document.getElementById('b').value = response['b'];
-                document.getElementById('result').value =response['result'];
-            });
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/covid-api.js')}}"></script>
 </body>
 </html>
