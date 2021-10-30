@@ -15,9 +15,9 @@
             a: <label class="form-control-label" for="a"></label><input class="form-control" type="text" value="0" name="a" id="a"><br>
             b: <label class="form-control-label" for="b"></label><input class="form-control" type="text" value="0" name="b" id="b"><br>
             result: <label class="form-control-label" for="result"></label><input class="form-control" type="text" name="result" id="result" disabled><br>
-            <button class="btn btn-primary" type="submit" value="submit" onclick="send_data()">Submit</button>
+            <button class="btn btn-primary" type="submit" value="submit" onclick="ajax_sum()">Submit</button>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md">
                 Countries: <label class="form-control-label" for="country"></label>
                 <select class="select2-country form-control" name="country" id="country">
@@ -39,17 +39,17 @@
                         <tr id="table-header-row"></tr>
                     </thead>
                     <tbody id="table-body">
-                        
+                        <tr id="first-row"></tr>
                     </tbody>
                 </table>
             </div>
             
-        </div>
+        </div> -->
     </div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static', filename='js/axios.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/covid-api.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/ajax-rest-api.js')}}"></script>
 </body>
 </html>
